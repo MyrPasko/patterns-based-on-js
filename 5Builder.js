@@ -1,4 +1,4 @@
-console.log('----------Builder----------');
+console.warn('----------Builder----------');
 
 class Car {
   constructor() {

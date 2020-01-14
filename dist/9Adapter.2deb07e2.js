@@ -117,65 +117,94 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"3AbstractFactory.js":[function(require,module,exports) {
+})({"9Adapter.js":[function(require,module,exports) {
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-console.warn('----------Abstract Factory Method----------'); // Abstract factory
+console.warn('----------Adapter----------');
 
-function bmvProducer(kind) {
-  return kind === 'sport' ? sportCarFactory : homeCarFactory;
-} // Factories
-
-
-function sportCarFactory() {
-  return new Z4();
-}
-
-function homeCarFactory() {
-  return new I3();
-}
-
-var Z4 =
+var Engine2 =
 /*#__PURE__*/
 function () {
-  function Z4() {
-    _classCallCheck(this, Z4);
+  function Engine2() {
+    _classCallCheck(this, Engine2);
   }
 
-  _createClass(Z4, [{
-    key: "info",
-    value: function info() {
-      console.log('[Sport Car]');
+  _createClass(Engine2, [{
+    key: "simpleInterface",
+    value: function simpleInterface() {
+      console.log('[Engine 2.0]');
     }
   }]);
 
-  return Z4;
+  return Engine2;
 }();
 
-var I3 =
+var EngineV8 =
 /*#__PURE__*/
 function () {
-  function I3() {
-    _classCallCheck(this, I3);
+  function EngineV8() {
+    _classCallCheck(this, EngineV8);
   }
 
-  _createClass(I3, [{
-    key: "info",
-    value: function info() {
-      console.log('[Home Car]');
+  _createClass(EngineV8, [{
+    key: "complicatedEngine",
+    value: function complicatedEngine() {
+      console.log('[Engine V8]');
     }
   }]);
 
-  return I3;
+  return EngineV8;
 }();
 
-var produceCar = bmvProducer('sport');
-var myCar = produceCar();
-myCar.info();
+var EngineV8Adapter =
+/*#__PURE__*/
+function () {
+  function EngineV8Adapter(engine) {
+    _classCallCheck(this, EngineV8Adapter);
+
+    this.engine = engine;
+  }
+
+  _createClass(EngineV8Adapter, [{
+    key: "simpleInterface",
+    value: function simpleInterface() {
+      return this.engine.complicatedEngine();
+    }
+  }]);
+
+  return EngineV8Adapter;
+}();
+
+var engine2 = new Engine2();
+var adaptedEngineV8 = new EngineV8Adapter(new EngineV8());
+
+var Auto =
+/*#__PURE__*/
+function () {
+  function Auto(engine) {
+    _classCallCheck(this, Auto);
+
+    this.engine = engine;
+  }
+
+  _createClass(Auto, [{
+    key: "showEngine",
+    value: function showEngine() {
+      this.engine.simpleInterface();
+    }
+  }]);
+
+  return Auto;
+}();
+
+var myAuto1 = new Auto(engine2);
+var myAuto2 = new Auto(adaptedEngineV8);
+myAuto1.showEngine();
+myAuto2.showEngine();
 },{}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -380,5 +409,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["node_modules/parcel-bundler/src/builtins/hmr-runtime.js","3AbstractFactory.js"], null)
-//# sourceMappingURL=/3AbstractFactory.64bb0f68.js.map
+},{}]},{},["node_modules/parcel-bundler/src/builtins/hmr-runtime.js","9Adapter.js"], null)
+//# sourceMappingURL=/9Adapter.2deb07e2.js.map

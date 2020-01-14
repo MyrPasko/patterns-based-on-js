@@ -117,65 +117,75 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"3AbstractFactory.js":[function(require,module,exports) {
+})({"1Singleton.js":[function(require,module,exports) {
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-console.warn('----------Abstract Factory Method----------'); // Abstract factory
+// Not good approach because of global variable
+// let instance;
+// class Counter {
+//   constructor() {
+//     if (!instance) {
+//       instance = this;
+//     }
+//     instance.count = 0;
+//     return instance;
+//   }
+//   getCount() {
+//     return instance.count;
+//   }
+//   increaseCount() {
+//     return instance.count++;
+//   }
+// }
+// const myCounter1 = new Counter();
+// const myCounter2 = new Counter();
+// myCounter1.increaseCount();
+// myCounter1.increaseCount();
+// console.log(myCounter2.getCount());
+// Better approach
+console.log("----------Singleton----------");
 
-function bmvProducer(kind) {
-  return kind === 'sport' ? sportCarFactory : homeCarFactory;
-} // Factories
-
-
-function sportCarFactory() {
-  return new Z4();
-}
-
-function homeCarFactory() {
-  return new I3();
-}
-
-var Z4 =
+var StaticCounter =
 /*#__PURE__*/
 function () {
-  function Z4() {
-    _classCallCheck(this, Z4);
+  function StaticCounter() {
+    _classCallCheck(this, StaticCounter);
+
+    if (_typeof(StaticCounter.instance) === "object") {
+      return StaticCounter.instance;
+    }
+
+    this.count = 0;
+    StaticCounter.instance = this;
+    return this;
   }
 
-  _createClass(Z4, [{
-    key: "info",
-    value: function info() {
-      console.log('[Sport Car]');
+  _createClass(StaticCounter, [{
+    key: "getCount",
+    value: function getCount() {
+      return this.count;
+    }
+  }, {
+    key: "increaseCount",
+    value: function increaseCount() {
+      return this.count++;
     }
   }]);
 
-  return Z4;
+  return StaticCounter;
 }();
 
-var I3 =
-/*#__PURE__*/
-function () {
-  function I3() {
-    _classCallCheck(this, I3);
-  }
-
-  _createClass(I3, [{
-    key: "info",
-    value: function info() {
-      console.log('[Home Car]');
-    }
-  }]);
-
-  return I3;
-}();
-
-var produceCar = bmvProducer('sport');
-var myCar = produceCar();
-myCar.info();
+var myStaticCounter1 = new StaticCounter();
+var myStaticCounter2 = new StaticCounter();
+myStaticCounter1.increaseCount();
+myStaticCounter1.increaseCount();
+console.log(myStaticCounter2.getCount());
 },{}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -380,5 +390,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["node_modules/parcel-bundler/src/builtins/hmr-runtime.js","3AbstractFactory.js"], null)
-//# sourceMappingURL=/3AbstractFactory.64bb0f68.js.map
+},{}]},{},["node_modules/parcel-bundler/src/builtins/hmr-runtime.js","1Singleton.js"], null)
+//# sourceMappingURL=/1Singleton.91085638.js.map

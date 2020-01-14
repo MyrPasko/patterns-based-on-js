@@ -1,4 +1,4 @@
-console.log('----------Abstract Factory Method----------');
+console.warn('----------Abstract Factory Method----------');
 
 // Abstract factory
 function bmvProducer(kind) {

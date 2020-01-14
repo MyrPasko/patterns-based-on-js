@@ -2,7 +2,7 @@
   "name": "kovalchuk-patterns",
   "version": "1.0.0",
   "description": "",
-  "main": "1singleton.js",
+  "main": "1Singleton.js",
   "scripts": {
     "start": "parcel index.html --open",
     "build": "parcel build index.html"

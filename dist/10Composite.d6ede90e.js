@@ -117,65 +117,184 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"3AbstractFactory.js":[function(require,module,exports) {
+})({"10Composite.js":[function(require,module,exports) {
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-console.warn('----------Abstract Factory Method----------'); // Abstract factory
+console.log("----------Factory method----------");
 
-function bmvProducer(kind) {
-  return kind === 'sport' ? sportCarFactory : homeCarFactory;
-} // Factories
-
-
-function sportCarFactory() {
-  return new Z4();
-}
-
-function homeCarFactory() {
-  return new I3();
-}
-
-var Z4 =
+var Equipment =
 /*#__PURE__*/
 function () {
-  function Z4() {
-    _classCallCheck(this, Z4);
+  function Equipment() {
+    _classCallCheck(this, Equipment);
   }
 
-  _createClass(Z4, [{
-    key: "info",
-    value: function info() {
-      console.log('[Sport Car]');
+  _createClass(Equipment, [{
+    key: "getPrice",
+    value: function getPrice() {
+      return this.price || 0;
+    }
+  }, {
+    key: "getName",
+    value: function getName() {
+      return this.name;
+    }
+  }, {
+    key: "setName",
+    value: function setName(name) {
+      this.name = name;
+    }
+  }, {
+    key: "setPrice",
+    value: function setPrice(price) {
+      this.price = price;
     }
   }]);
 
-  return Z4;
+  return Equipment;
 }();
 
-var I3 =
+var Engine =
 /*#__PURE__*/
-function () {
-  function I3() {
-    _classCallCheck(this, I3);
+function (_Equipment) {
+  _inherits(Engine, _Equipment);
+
+  function Engine() {
+    var _this;
+
+    _classCallCheck(this, Engine);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Engine).call(this));
+
+    _this.setName('Engine');
+
+    _this.setPrice(800);
+
+    return _this;
   }
 
-  _createClass(I3, [{
-    key: "info",
-    value: function info() {
-      console.log('[Home Car]');
+  return Engine;
+}(Equipment);
+
+var Body =
+/*#__PURE__*/
+function (_Equipment2) {
+  _inherits(Body, _Equipment2);
+
+  function Body() {
+    var _this2;
+
+    _classCallCheck(this, Body);
+
+    _this2 = _possibleConstructorReturn(this, _getPrototypeOf(Body).call(this));
+
+    _this2.setName('Body');
+
+    _this2.setPrice(3000);
+
+    return _this2;
+  }
+
+  return Body;
+}(Equipment);
+
+var Tools =
+/*#__PURE__*/
+function (_Equipment3) {
+  _inherits(Tools, _Equipment3);
+
+  function Tools() {
+    var _this3;
+
+    _classCallCheck(this, Tools);
+
+    _this3 = _possibleConstructorReturn(this, _getPrototypeOf(Tools).call(this));
+
+    _this3.setName('Tools');
+
+    _this3.setPrice(4000);
+
+    return _this3;
+  }
+
+  return Tools;
+}(Equipment);
+
+var Composite =
+/*#__PURE__*/
+function (_Equipment4) {
+  _inherits(Composite, _Equipment4);
+
+  function Composite() {
+    var _this4;
+
+    _classCallCheck(this, Composite);
+
+    _this4 = _possibleConstructorReturn(this, _getPrototypeOf(Composite).call(this));
+    _this4.equipments = [];
+    return _this4;
+  }
+
+  _createClass(Composite, [{
+    key: "add",
+    value: function add(equipment) {
+      this.equipments.push(equipment);
+    }
+  }, {
+    key: "getPrice",
+    value: function getPrice() {
+      return this.equipments.map(function (equipment) {
+        return equipment.getPrice();
+      }).reduce(function (a, b) {
+        return a + b;
+      });
     }
   }]);
 
-  return I3;
-}();
+  return Composite;
+}(Equipment);
 
-var produceCar = bmvProducer('sport');
-var myCar = produceCar();
-myCar.info();
+var Car =
+/*#__PURE__*/
+function (_Composite) {
+  _inherits(Car, _Composite);
+
+  function Car() {
+    var _this5;
+
+    _classCallCheck(this, Car);
+
+    _this5 = _possibleConstructorReturn(this, _getPrototypeOf(Car).call(this));
+
+    _this5.setName('Audi');
+
+    return _this5;
+  }
+
+  return Car;
+}(Composite);
+
+var myCar = new Car();
+myCar.add(new Engine());
+myCar.add(new Tools());
+myCar.add(new Body());
+console.log('[Car price: ]', myCar.getPrice());
 },{}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -380,5 +499,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["node_modules/parcel-bundler/src/builtins/hmr-runtime.js","3AbstractFactory.js"], null)
-//# sourceMappingURL=/3AbstractFactory.64bb0f68.js.map
+},{}]},{},["node_modules/parcel-bundler/src/builtins/hmr-runtime.js","10Composite.js"], null)
+//# sourceMappingURL=/10Composite.d6ede90e.js.map

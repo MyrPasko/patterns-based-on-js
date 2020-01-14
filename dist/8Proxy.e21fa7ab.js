@@ -117,65 +117,73 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"3AbstractFactory.js":[function(require,module,exports) {
+})({"8Proxy.js":[function(require,module,exports) {
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-console.warn('----------Abstract Factory Method----------'); // Abstract factory
+console.warn('----------Proxy----------');
 
-function bmvProducer(kind) {
-  return kind === 'sport' ? sportCarFactory : homeCarFactory;
-} // Factories
-
-
-function sportCarFactory() {
-  return new Z4();
-}
-
-function homeCarFactory() {
-  return new I3();
-}
-
-var Z4 =
+var CarOpening =
 /*#__PURE__*/
 function () {
-  function Z4() {
-    _classCallCheck(this, Z4);
+  function CarOpening() {
+    _classCallCheck(this, CarOpening);
   }
 
-  _createClass(Z4, [{
-    key: "info",
-    value: function info() {
-      console.log('[Sport Car]');
+  _createClass(CarOpening, [{
+    key: "open",
+    value: function open() {
+      console.log('[Opening car door]');
+    }
+  }, {
+    key: "close",
+    value: function close() {
+      console.log('[Close car door]');
     }
   }]);
 
-  return Z4;
+  return CarOpening;
 }();
 
-var I3 =
+var SecuritySystem =
 /*#__PURE__*/
 function () {
-  function I3() {
-    _classCallCheck(this, I3);
+  function SecuritySystem(door) {
+    _classCallCheck(this, SecuritySystem);
+
+    this.door = door;
   }
 
-  _createClass(I3, [{
-    key: "info",
-    value: function info() {
-      console.log('[Home Car]');
+  _createClass(SecuritySystem, [{
+    key: "open",
+    value: function open(password) {
+      if (this.authenticate(password)) {
+        this.door.open();
+      } else {
+        console.log('[Access denied!!]');
+      }
+    }
+  }, {
+    key: "authenticate",
+    value: function authenticate(password) {
+      return password === 'Ilon';
+    }
+  }, {
+    key: "close",
+    value: function close() {
+      this.door.close();
     }
   }]);
 
-  return I3;
+  return SecuritySystem;
 }();
 
-var produceCar = bmvProducer('sport');
-var myCar = produceCar();
-myCar.info();
+var car = new SecuritySystem(new CarOpening());
+car.open('Jack');
+car.open('Ilon');
 },{}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -380,5 +388,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["node_modules/parcel-bundler/src/builtins/hmr-runtime.js","3AbstractFactory.js"], null)
-//# sourceMappingURL=/3AbstractFactory.64bb0f68.js.map
+},{}]},{},["node_modules/parcel-bundler/src/builtins/hmr-runtime.js","8Proxy.js"], null)
+//# sourceMappingURL=/8Proxy.e21fa7ab.js.map

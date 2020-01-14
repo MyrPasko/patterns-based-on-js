@@ -1,4 +1,4 @@
-console.log('----------Prototype----------');
+console.warn('----------Prototype----------');
 
 class TeslaCar {
   constructor(model, price, interior, autopilot) {

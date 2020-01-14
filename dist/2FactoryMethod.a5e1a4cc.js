@@ -117,65 +117,52 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"3AbstractFactory.js":[function(require,module,exports) {
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
+})({"2FactoryMethod.js":[function(require,module,exports) {
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-console.warn('----------Abstract Factory Method----------'); // Abstract factory
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function bmvProducer(kind) {
-  return kind === 'sport' ? sportCarFactory : homeCarFactory;
-} // Factories
+console.log("----------Factory method----------");
+console.log("Shit"); // Class constructor
 
+var Bmv = function Bmv(model, price, maxSpeed) {
+  _classCallCheck(this, Bmv);
 
-function sportCarFactory() {
-  return new Z4();
-}
+  this.model = model;
+  this.price = price;
+  this.maxSpeed = maxSpeed;
+};
 
-function homeCarFactory() {
-  return new I3();
-}
-
-var Z4 =
+var BmvFactory =
 /*#__PURE__*/
 function () {
-  function Z4() {
-    _classCallCheck(this, Z4);
+  function BmvFactory() {
+    _classCallCheck(this, BmvFactory);
   }
 
-  _createClass(Z4, [{
-    key: "info",
-    value: function info() {
-      console.log('[Sport Car]');
+  _createClass(BmvFactory, [{
+    key: "create",
+    value: function create(type) {
+      if (type === "X5") {
+        return new Bmv(type, 108000, 300);
+      }
+
+      if (type === "X6") {
+        return new Bmv(type, 111000, 320);
+      }
     }
   }]);
 
-  return Z4;
+  return BmvFactory;
 }();
 
-var I3 =
-/*#__PURE__*/
-function () {
-  function I3() {
-    _classCallCheck(this, I3);
-  }
-
-  _createClass(I3, [{
-    key: "info",
-    value: function info() {
-      console.log('[Home Car]');
-    }
-  }]);
-
-  return I3;
-}();
-
-var produceCar = bmvProducer('sport');
-var myCar = produceCar();
-myCar.info();
+var factory = new BmvFactory();
+var x5 = factory.create("X5");
+var x6 = factory.create("X6");
+console.log("X5", x5);
+console.log("X6", x6);
 },{}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -380,5 +367,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["node_modules/parcel-bundler/src/builtins/hmr-runtime.js","3AbstractFactory.js"], null)
-//# sourceMappingURL=/3AbstractFactory.64bb0f68.js.map
+},{}]},{},["node_modules/parcel-bundler/src/builtins/hmr-runtime.js","2FactoryMethod.js"], null)
+//# sourceMappingURL=/2FactoryMethod.a5e1a4cc.js.map

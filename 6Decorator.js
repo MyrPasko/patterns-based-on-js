@@ -1,4 +1,4 @@
-console.log('----------Decorator----------');
+console.warn('----------Decorator----------');
 
 class Car {
   constructor() {

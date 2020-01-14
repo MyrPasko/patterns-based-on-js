@@ -1,15 +1,41 @@
-console.log('----------Facade----------');
+console.warn('----------Facade----------');
 
 class Conveyor {
-  setBody() {console.log('[Body set!]');}
-  setEngine() {console.log('[Engine set!]');}
-  getEngine() {console.log('[Dismantle Engine!]');}
-  setInterior() {console.log('[Interior set!]');}
-  getInterior() {console.log('[Interior updated!]');}
-  setExterior() {console.log('[Exterior set!]');}
-  setWheels() {console.log('[Wheels set!]');}
-  addElectronics() {console.log('[Added electronics!]');}
-  paint() {console.log('[Car painted!]');}
+  setBody() {
+    console.log('[Body set!]');
+  }
+
+  setEngine() {
+    console.log('[Engine set!]');
+  }
+
+  getEngine() {
+    console.log('[Dismantle Engine!]');
+  }
+
+  setInterior() {
+    console.log('[Interior set!]');
+  }
+
+  getInterior() {
+    console.log('[Interior updated!]');
+  }
+
+  setExterior() {
+    console.log('[Exterior set!]');
+  }
+
+  setWheels() {
+    console.log('[Wheels set!]');
+  }
+
+  addElectronics() {
+    console.log('[Added electronics!]');
+  }
+
+  paint() {
+    console.log('[Car painted!]');
+  }
 }
 
 class ConveyorFacade {

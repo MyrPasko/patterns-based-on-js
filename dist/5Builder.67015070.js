@@ -124,7 +124,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-console.log('----------Builder----------');
+console.warn('----------Builder----------');
 
 var Car = function Car() {
   _classCallCheck(this, Car);
@@ -211,7 +211,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50678" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50236" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
